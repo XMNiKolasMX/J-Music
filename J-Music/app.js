@@ -35,6 +35,10 @@ app.get('/artistas', async (req, res) => {
             .order('nombre', { ascending: true });
 
         if (error) throw error;
+
+        // DEPURACIÓN: Ver qué datos llegan realmente desde Supabase
+        console.log("Datos recibidos de Supabase:", JSON.stringify(data, null, 2));
+
         res.render('artista', { artistas: data });
     } catch (err) {
         console.error('Error en la consulta de artistas:', err);
@@ -47,14 +51,12 @@ app.get('/detalle/:id', async (req, res) => {
     try {
         const artistaId = req.params.id;
 
-        // 1. Obtener datos del artista (usamos .single() para obtener un objeto, no un array)
         const { data: artista, error: errorArtista } = await supabase
             .from('artistas')
             .select('*')
             .eq('id', artistaId)
             .single();
 
-        // 2. Obtener videos de la tabla videografia
         const { data: videos, error: errorVideos } = await supabase
             .from('videografia')
             .select('*')
@@ -66,7 +68,7 @@ app.get('/detalle/:id', async (req, res) => {
         if (artista) {
             res.render('detalle', { 
                 artista: artista, 
-                videos: videos || [] // Pasamos el array de videos
+                videos: videos || [] 
             });
         } else {
             res.status(404).send('Artista no encontrado');
