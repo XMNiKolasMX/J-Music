@@ -4,25 +4,29 @@
     <h1>Lista de Artistas</h1>
     
     <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
-        <!-- Usamos el contenedor que definimos en el CSS -->
         <div class="lista-artistas">
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
-                    <!-- 
-                         CORRECCIÓN: Se agregó '/img/' antes de la variable 
-                         para que coincida con la ruta en la carpeta public.
-                         Asegúrate de que el valor en tu base de datos 
-                         coincida exactamente con el nombre del archivo.
-                    -->
-                    <!-- Fíjate bien en la barra "/" inicial -->
-<img src="<%= artista.imagen_url.startsWith('/') ? artista.imagen_url : '/' + artista.imagen_url %>" alt="<%= artista.nombre %>">
+                    
+                    <% 
+                        // Lógica segura: si existe la URL, la usamos. 
+                        // Si no empieza con '/', se la agregamos.
+                        let imgUrl = artista.imagen_url;
+                        if (imgUrl && !imgUrl.startsWith('/')) {
+                            imgUrl = '/' + imgUrl;
+                        }
+                    %>
+
+                    <% if (imgUrl) { %>
+                        <img src="<%= imgUrl %>" alt="<%= artista.nombre %>">
+                    <% } else { %>
+                        <div class="img-placeholder">Imagen no disponible</div>
+                    <% } %>
                     
                     <h3><%= artista.nombre %></h3>
                     
-                    <!-- Agregamos la biografía -->
                     <p><%= artista.biografia %></p>
                     
-                    <!-- Botón de detalle -->
                     <a href="/detalle/<%= artista.id %>">Ver más</a>
                 </div>
             <% }) %>
