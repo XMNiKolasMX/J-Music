@@ -8,9 +8,13 @@
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
                     
+                    <!-- LÍNEA DE DEPURACIÓN: Esto nos dirá qué está leyendo el servidor -->
+                    <p style="color: yellow; font-size: 12px; background: black;">
+                        Dato recibido: <%= artista.imagen_url %>
+                    </p>
+
                     <% 
-                        // Lógica segura: si existe la URL, la usamos. 
-                        // Si no empieza con '/', se la agregamos.
+                        // Lógica: normalizamos la ruta
                         let imgUrl = artista.imagen_url;
                         if (imgUrl && !imgUrl.startsWith('/')) {
                             imgUrl = '/' + imgUrl;
@@ -20,13 +24,11 @@
                     <% if (imgUrl) { %>
                         <img src="<%= imgUrl %>" alt="<%= artista.nombre %>">
                     <% } else { %>
-                        <div class="img-placeholder">Imagen no disponible</div>
+                        <p>Imagen no disponible</p>
                     <% } %>
                     
                     <h3><%= artista.nombre %></h3>
-                    
                     <p><%= artista.biografia %></p>
-                    
                     <a href="/detalle/<%= artista.id %>">Ver más</a>
                 </div>
             <% }) %>
