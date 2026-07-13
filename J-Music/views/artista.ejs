@@ -14,7 +14,8 @@
                          Asegúrate de que el valor en tu base de datos 
                          coincida exactamente con el nombre del archivo.
                     -->
-                    <img src="<%= artista.imagen_url %>" alt="<%= artista.nombre %>">
+                    <!-- Fíjate bien en la barra "/" inicial -->
+<img src="<%= artista.imagen_url.startsWith('/') ? artista.imagen_url : '/' + artista.imagen_url %>" alt="<%= artista.nombre %>">
                     
                     <h3><%= artista.nombre %></h3>
                     
