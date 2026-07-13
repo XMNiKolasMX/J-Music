@@ -8,8 +8,13 @@
         <div class="lista-artistas">
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
-                    <!-- Aquí llamamos a la columna imagen_url -->
-                    <img src="<%= artista.imagen_url %>" alt="<%= artista.nombre %>">
+                    <!-- 
+                         CORRECCIÓN: Se agregó '/img/' antes de la variable 
+                         para que coincida con la ruta en la carpeta public.
+                         Asegúrate de que el valor en tu base de datos 
+                         coincida exactamente con el nombre del archivo.
+                    -->
+                    <img src="/img/<%= artista.imagen_url %>" alt="<%= artista.nombre %>">
                     
                     <h3><%= artista.nombre %></h3>
                     
