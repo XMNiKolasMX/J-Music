@@ -1,0 +1,46 @@
+<%- include('header') %>
+
+<main class="container">
+    <% if (typeof artista !== 'undefined' && artista) { %>
+        <h1><%= artista.nombre %></h1>
+        <p style="text-align: center;"><%= artista.biografia || 'Sin biografía disponible' %></p>
+        
+        <h2 style="margin-top: 40px;">Discografía</h2>
+        
+        <div class="lista-artistas">
+            <% if (typeof videos !== 'undefined' && videos.length > 0) { %>
+                <% videos.forEach(video => { %>
+                    <div class="artista-card">
+                        <% if (video.portada_url) { %>
+                            <img src="<%= video.portada_url %>" alt="<%= video.titulo %>" referrerpolicy="no-referrer">
+                        <% } %>
+                        
+                        <h3><%= video.titulo || 'Sin título' %></h3>
+                        
+                        <!-- Mostramos la fecha tal cual viene de la base de datos (AAAA.MM.DD) -->
+                        <p>Lanzamiento: <%= video.fecha_lanzamiento || 'N/A' %></p>
+                        
+                        <div class="botones-container">
+                            <% if (video.link_descarga && video.link_descarga.trim() !== '') { %>
+                                <% const links = video.link_descarga.split(','); %>
+                                <% links.forEach(link => { %>
+                                    <a href="<%= link.trim() %>" target="_blank" class="btn-descarga" style="margin-bottom: 5px; display: block;">
+                                        Descargar
+                                    </a>
+                                <% }) %>
+                            <% } else { %>
+                                <p style="color: #666;">Sin enlaces disponibles</p>
+                            <% } %>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <p>No hay videos registrados para este artista.</p>
+            <% } %>
+        </div>
+    <% } else { %>
+        <p>No se encontró información del artista.</p>
+    <% } %>
+</main>
+
+<%- include('footer') %>
