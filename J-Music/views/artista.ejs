@@ -4,19 +4,18 @@
     <h1>Lista de Artistas</h1>
     
     <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
-        <!-- Usamos el contenedor que definimos en el CSS -->
         <div class="lista-artistas">
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
-                    <!-- Aquí llamamos a la columna imagen_url -->
-                    <img src="<%= artista.imagen_url %>" alt="<%= artista.nombre %>">
+                    
+                    <!-- Usamos el enlace directo guardado en la base de datos -->
+                    <!-- Se incluye un 'onerror' por si el link falla o no carga -->
+                    <img src="<%= artista.imagen_url %>" 
+                         alt="<%= artista.nombre %>" 
+                         onerror="this.src='/img/default.jpg';">
                     
                     <h3><%= artista.nombre %></h3>
-                    
-                    <!-- Agregamos la biografía -->
                     <p><%= artista.biografia %></p>
-                    
-                    <!-- Botón de detalle -->
                     <a href="/detalle/<%= artista.id %>">Ver más</a>
                 </div>
             <% }) %>
