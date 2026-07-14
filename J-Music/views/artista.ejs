@@ -8,24 +8,18 @@
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
                     
-                    <!-- LÍNEA DE DEPURACIÓN: Esto nos dirá qué está leyendo el servidor -->
-                    <p style="color: yellow; font-size: 12px; background: black;">
-                        Dato recibido: <%= artista.imagen_url %>
-                    </p>
-
                     <% 
-                        // Lógica: normalizamos la ruta
-                        let imgUrl = artista.imagen_url;
-                        if (imgUrl && !imgUrl.startsWith('/')) {
-                            imgUrl = '/' + imgUrl;
-                        }
+                        /* 
+                           SOLUCIÓN DEFINITIVA: 
+                           Construimos la ruta basándonos en el ID del artista.
+                           Asegúrate de que tus archivos en /public/img/ 
+                           se llamen exactamente: 1.jpg, 2.jpg, 3.jpg, etc.
+                        */
+                        let imgUrl = '/img/' + artista.id + '.jpg';
                     %>
 
-                    <% if (imgUrl) { %>
-                        <img src="<%= imgUrl %>" alt="<%= artista.nombre %>">
-                    <% } else { %>
-                        <p>Imagen no disponible</p>
-                    <% } %>
+                    <img src="<%= imgUrl %>" alt="<%= artista.nombre %>" 
+                         onerror="this.onerror=null; this.src='/img/default.jpg';">
                     
                     <h3><%= artista.nombre %></h3>
                     <p><%= artista.biografia %></p>
