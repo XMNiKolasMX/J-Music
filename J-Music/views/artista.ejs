@@ -8,8 +8,7 @@
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
                     
-                    <!-- Usamos el enlace directo guardado en la base de datos -->
-                    <!-- Se incluye un 'onerror' por si el link falla o no carga -->
+                    <!-- Aquí se cargará directamente el link que pusiste en Supabase -->
                     <img src="<%= artista.imagen_url %>" 
                          alt="<%= artista.nombre %>" 
                          onerror="this.src='/img/default.jpg';">
