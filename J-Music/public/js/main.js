@@ -1,45 +1,47 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("¡Bienvenido al archivo de J-Music!");
+    // 1. Barra de progreso de lectura
+    const progressBar = document.createElement('div');
+    progressBar.id = 'progress-bar';
+    document.body.appendChild(progressBar);
 
-    // 1. Efecto de aparición suave para el título principal
-    const mainTitle = document.querySelector('h1');
-    if (mainTitle) {
-        mainTitle.style.opacity = 0;
-        mainTitle.style.transform = 'translateY(-20px)';
-        mainTitle.style.transition = 'all 1.5s ease-out';
-        
-        setTimeout(() => {
-            mainTitle.style.opacity = 1;
-            mainTitle.style.transform = 'translateY(0)';
-        }, 200);
-    }
-
-    // 2. Efecto de "Flicker" (parpadeo) dramático al pasar el mouse por los títulos
-    const headers = document.querySelectorAll('h1, h2');
-    headers.forEach(h => {
-        h.addEventListener('mouseover', () => {
-            h.style.textShadow = '0 0 10px #ff0000, 0 0 20px #ff0000';
-            setTimeout(() => { h.style.textShadow = 'none'; }, 500);
-        });
+    window.addEventListener('scroll', () => {
+        const scrollTop = window.scrollY;
+        const docHeight = document.body.offsetHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+        progressBar.style.width = scrollPercent + '%';
     });
 
-    // 3. Aparición escalonada para las tarjetas de artistas (Scroll Reveal simple)
-    const cards = document.querySelectorAll('.artista-card');
+    // 2. Efecto de "Pulso" para títulos (hace que respiren)
+    const titles = document.querySelectorAll('h1, h2');
+    titles.forEach(t => {
+        t.style.animation = 'pulse 3s infinite';
+    });
+
+    // 3. Aparición dramática con ScrollReveal
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                setTimeout(() => {
-                    entry.target.style.opacity = 1;
-                    entry.target.style.transform = 'translateY(0)';
-                }, index * 100); // Aparecen una por una con retraso
+                entry.target.style.opacity = 1;
+                entry.target.style.transform = 'translateY(0)';
             }
         });
     }, { threshold: 0.1 });
 
-    cards.forEach(card => {
+    document.querySelectorAll('.artista-card').forEach(card => {
         card.style.opacity = 0;
         card.style.transform = 'translateY(50px)';
-        card.style.transition = 'all 0.6s ease-out';
+        card.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
         observer.observe(card);
     });
 });
+
+// Estilo de animación para el pulso (puedes añadirlo a tu CSS o aquí)
+const style = document.createElement('style');
+style.innerHTML = `
+    @keyframes pulse {
+        0% { opacity: 1; }
+        50% { opacity: 0.7; }
+        100% { opacity: 1; }
+    }
+`;
+document.head.appendChild(style);
