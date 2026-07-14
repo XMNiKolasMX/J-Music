@@ -10,15 +10,15 @@
                     
                     <% 
                         /* 
-                           SOLUCIÓN DEFINITIVA: 
-                           Construimos la ruta basándonos en el ID del artista.
-                           Asegúrate de que tus archivos en /public/img/ 
-                           se llamen exactamente: 1.jpg, 2.jpg, 3.jpg, etc.
+                           Lógica basada en el ID:
+                           El servidor buscará el archivo /img/ID.jpg
+                           Si no encuentra la imagen, mostrará /img/default.jpg
                         */
                         let imgUrl = '/img/' + artista.id + '.jpg';
                     %>
 
-                    <img src="<%= imgUrl %>" alt="<%= artista.nombre %>" 
+                    <img src="<%= imgUrl %>" 
+                         alt="<%= artista.nombre %>" 
                          onerror="this.onerror=null; this.src='/img/default.jpg';">
                     
                     <h3><%= artista.nombre %></h3>
