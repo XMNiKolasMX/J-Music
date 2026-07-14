@@ -36,7 +36,9 @@ app.get('/artistas', async (req, res) => {
 
         if (error) throw error;
 
-        // Renderizamos la vista enviando los datos obtenidos
+        // DEBUG: Esto te ayudará a ver en tu consola si la columna imagen_url trae datos
+        console.log("Datos de artistas recibidos:", JSON.stringify(data, null, 2));
+
         res.render('artista', { artistas: data });
     } catch (err) {
         console.error('Error en la consulta de artistas:', err);
@@ -66,7 +68,7 @@ app.get('/detalle/:id', async (req, res) => {
         if (artista) {
             res.render('detalle', { 
                 artista: artista, 
-                videos: videos || [] 
+                videos: videos || []
             });
         } else {
             res.status(404).send('Artista no encontrado');
