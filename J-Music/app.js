@@ -36,9 +36,7 @@ app.get('/artistas', async (req, res) => {
 
         if (error) throw error;
 
-        // DEPURACIÓN: Ver qué datos llegan realmente desde Supabase
-        console.log("Datos recibidos de Supabase:", JSON.stringify(data, null, 2));
-
+        // Renderizamos la vista enviando los datos obtenidos
         res.render('artista', { artistas: data });
     } catch (err) {
         console.error('Error en la consulta de artistas:', err);
