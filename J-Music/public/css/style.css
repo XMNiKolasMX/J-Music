@@ -220,4 +220,117 @@ p {
     .caja-imagenes img { width: 100%; } 
     .lista-artistas { grid-template-columns: 1fr; } 
 }
-```[cite: 1]
+
+/* --- 3. EXPANSION VISUAL Y DETALLES DE CULTO --- */
+h3 { color: #ff3333; text-transform: uppercase; border-left: 4px solid #8b0000; padding-left: 15px; margin-top: 40px; letter-spacing: 2px; text-shadow: 0 0 5px rgba(255,0,0,0.3); }
+
+ul { list-style: none; padding: 20px; }
+li { margin-bottom: 12px; border-bottom: 1px solid #1a0000; padding: 8px 0; color: #aaa; transition: 0.3s; }
+li:hover { color: #fff; padding-left: 10px; border-bottom: 1px solid #440000; }
+li strong { color: #ff0000; }
+
+article { padding: 30px; border: 1px solid #1a0000; background: radial-gradient(circle at top right, #150000, #0a0a0a); box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+
+::selection { background: #8b0000; color: #fff; }
+
+section { animation: fadeIn 1.2s ease-in; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container::before {
+    content: "[ SYSTEM_READY_2026 // VISUAL_KEI_DATABASE ]";
+    display: block; text-align: center; color: #330000; font-size: 0.7rem; margin-bottom: 15px; letter-spacing: 5px;
+}
+
+blockquote {
+    border-left: 3px solid #ff0000;
+    margin: 20px;
+    padding: 10px 20px;
+    background: #0f0f0f;
+    font-style: italic;
+    color: #888;
+}
+
+nav a:hover { animation: blink 1s infinite; }
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    top: -100%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, rgba(255, 0, 0, 0.03), transparent);
+    animation: scan 8s linear infinite;
+    pointer-events: none;
+    z-index: 999;
+}
+
+@keyframes scan {
+    from { top: -100%; }
+    to { top: 100%; }
+}
+
+button {
+    background: #000;
+    color: #ff0000;
+    border: 1px solid #ff0000;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.4s;
+}
+
+button:hover {
+    background: #ff0000;
+    color: #fff;
+    box-shadow: 0 0 15px #ff0000;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #330000, transparent);
+    margin: 40px 0;
+}
+
+/* --- 4. EXPANSIÓN FINAL DE ESTILO GÓTICO/INDUSTRIAL --- */
+.container::after {
+    content: "[ END_OF_FILE ]";
+    display: block; text-align: center; color: #220000; font-size: 0.6rem; margin-top: 50px;
+}
+
+h1:hover, h2:hover {
+    letter-spacing: 6px;
+    transition: 0.5s;
+    color: #ff6666;
+}
+
+.artista-card:active {
+    transform: scale(0.98);
+}
+
+.galeria-4 img:hover {
+    filter: brightness(1.2) contrast(1.2) grayscale(0%);
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.5);
+}
+
+nav {
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+.lista-artistas {
+    background: rgba(5, 5, 5, 0.8);
+    border: 1px solid #220000;
+}
+
+article p {
+    border-left: 2px solid #220000;
+    padding-left: 15px;
+}
