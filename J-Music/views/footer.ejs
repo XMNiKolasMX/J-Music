@@ -1,19 +1,22 @@
 <hr>
 <footer>
     <div class="footer-content" style="text-align: center; padding-bottom: 20px;">
-        <!-- Contenedor del reproductor -->
+        <!-- Contenedor del reproductor: Asegúrate de que este ID coincida con el de main.js -->
         <div id="player" style="position: absolute; left: -9999px; visibility: hidden;"></div>
 
         <!-- Reproductor Estilo Industrial/Gótico -->
         <div class="custom-player">
             <div class="player-header">● J-MUSIC_STREAMING_NODE_ACTIVE</div>
             <div class="controls">
-                <button id="btn-prev" title="Anterior">⏮</button>
-                <button id="main-play-btn" title="Play/Pause">▶</button>
-                <button id="btn-next" title="Siguiente">⏭</button>
+                <!-- Se han añadido los eventos onclick para interactuar con main.js -->
+                <button id="btn-prev" onclick="prevTrack()" title="Anterior">⏮</button>
+                <button id="main-play-btn" onclick="togglePlay()" title="Play/Pause">▶</button>
+                <button id="btn-next" onclick="nextTrack()" title="Siguiente">⏭</button>
+                
                 <div class="volume-control">
                     <span style="font-size: 0.6rem;">VOL</span>
-                    <input type="range" id="vol-slider" min="0" max="100" value="80">
+                    <!-- El evento oninput permite ajustar el volumen en tiempo real -->
+                    <input type="range" id="vol-slider" min="0" max="100" value="80" oninput="setVolume(this.value)">
                 </div>
             </div>
         </div>
@@ -23,3 +26,6 @@
         </p>
     </div>
 </footer>
+
+<!-- Esta etiqueta es fundamental para que main.js cargue y los botones funcionen -->
+<script src="/js/main.js"></script>
