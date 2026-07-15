@@ -334,3 +334,20 @@ article p {
     border-left: 2px solid #220000;
     padding-left: 15px;
 }
+
+// Añadir al final de tu main.js existente
+const playerWrapper = document.querySelector('.youtube-player-wrapper');
+if (playerWrapper) {
+    playerWrapper.style.opacity = 0;
+    playerWrapper.style.transition = 'opacity 2s ease';
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(playerWrapper);
+}
