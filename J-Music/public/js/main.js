@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Sistema de Archivo J-Music Cargado.");
+    console.log("Sistema de Archivo J-Music Cargado. Inicializando protocolos de preservación...");
 
     // 1. Barra de progreso de lectura (Gótica)
     const progressBar = document.createElement('div');
@@ -17,54 +17,83 @@ document.addEventListener('DOMContentLoaded', () => {
     const titles = document.querySelectorAll('h1, h2');
     const triggerGlitch = (el) => {
         el.style.textShadow = '3px 0 #ff0000, -3px 0 #000';
-        setTimeout(() => { el.style.textShadow = '0 0 10px #ff0000'; }, 100);
+        el.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+        setTimeout(() => { 
+            el.style.textShadow = '0 0 10px #ff0000'; 
+            el.style.transform = 'translateX(0)';
+        }, 100);
     };
     
     titles.forEach(t => {
         setInterval(() => {
-            if(Math.random() > 0.8) triggerGlitch(t);
-        }, 2000);
+            if(Math.random() > 0.85) triggerGlitch(t);
+        }, 3000);
     });
 
-    // 3. Seguimiento de mouse sutil para las tarjetas de artista
-    const cards = document.querySelectorAll('.artista-card');
+    // 3. Seguimiento de mouse sutil para las tarjetas
+    const cards = document.querySelectorAll('.artista-card, section');
     cards.forEach(card => {
         card.addEventListener('mousemove', (e) => {
             const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            card.style.setProperty('--x', `${x}px`);
-            card.style.setProperty('--y', `${y}px`);
+            card.style.setProperty('--x', `${e.clientX - rect.left}px`);
+            card.style.setProperty('--y', `${e.clientY - rect.top}px`);
         });
     });
 
-    // 4. Aparición dramática con ScrollReveal (Avanzado)
+    // 4. Aparición dramática con ScrollReveal
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
-                // Aparecen con un ligero retraso escalonado
                 setTimeout(() => {
                     entry.target.style.opacity = 1;
                     entry.target.style.transform = 'translateY(0) rotate(0deg)';
-                }, index * 150);
+                }, index * 100);
             }
         });
     }, { threshold: 0.1 });
 
-    document.querySelectorAll('.artista-card, .epoca-img-container').forEach(el => {
+    document.querySelectorAll('.artista-card, .epoca-img-container, section').forEach(el => {
         el.style.opacity = 0;
-        el.style.transform = 'translateY(50px) rotate(-2deg)';
-        el.style.transition = 'all 0.8s cubic-bezier(0.2, 0.8, 0.2, 1)';
+        el.style.transform = 'translateY(50px) rotate(-1deg)';
+        el.style.transition = 'all 0.9s cubic-bezier(0.19, 1, 0.22, 1)';
         observer.observe(el);
     });
 
-    // 5. Efecto de "Carga de Sistema" (Opcional: aparece un mensaje fugaz)
-    const body = document.querySelector('body');
-    const loadMsg = document.createElement('div');
-    loadMsg.innerHTML = "INICIALIZANDO ARCHIVO... VISUAL KEI DETECTADO";
-    loadMsg.style.cssText = "position:fixed; bottom:20px; right:20px; color: #ff0000; font-size: 10px; opacity:0.5; pointer-events:none;";
-    body.appendChild(loadMsg);
-    setTimeout(() => loadMsg.style.opacity = 0, 3000);
+    // 5. Efecto "Terminal de Comando" al pie de página
+    const terminal = document.createElement('div');
+    terminal.id = "terminal-msg";
+    terminal.style.cssText = "position:fixed; bottom:10px; left:10px; color: #550000; font-family: monospace; font-size: 9px; pointer-events:none; z-index:9999;";
+    document.body.appendChild(terminal);
+    
+    let logs = ["SCANNING_DATABASE...", "LOCATING_VHS_FILES...", "SYNCING_SERVERS...", "ACCESS_GRANTED_2026"];
+    let i = 0;
+    setInterval(() => {
+        terminal.innerText = `> ${logs[i % logs.length]}`;
+        i++;
+    }, 4000);
+
+    // 6. Efecto de "Ruido Visual" dinámico (Glitch de pantalla completa)
+    const glitchOverlay = document.createElement('div');
+    glitchOverlay.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9998; opacity:0; background: rgba(255,0,0,0.05);";
+    document.body.appendChild(glitchOverlay);
+
+    setInterval(() => {
+        glitchOverlay.style.opacity = 0.1;
+        setTimeout(() => glitchOverlay.style.opacity = 0, 50);
+    }, 10000); // Un "parpadeo" de error cada 10 segundos
+
+    // 7. Cursor Magnético (efecto sobre enlaces)
+    const links = document.querySelectorAll('a');
+    links.forEach(link => {
+        link.addEventListener('mouseenter', () => {
+            link.style.letterSpacing = "4px";
+            link.style.textShadow = "0 0 15px #ff0000";
+        });
+        link.addEventListener('mouseleave', () => {
+            link.style.letterSpacing = "2px";
+            link.style.textShadow = "none";
+        });
+    });
 });
 
 // Estilos dinámicos inyectados
@@ -72,15 +101,27 @@ const style = document.createElement('style');
 style.innerHTML = `
     @keyframes pulse {
         0%, 100% { opacity: 1; }
-        50% { opacity: 0.6; }
+        50% { opacity: 0.7; }
     }
-    h1, h2 { animation: pulse 2s infinite; }
-    .artista-card { position: relative; overflow: hidden; }
-    .artista-card::before {
-        content: ''; position: absolute; top: var(--y); left: var(--x);
-        width: 100px; height: 100px; background: rgba(255, 0, 0, 0.1);
-        border-radius: 50%; transform: translate(-50%, -50%);
-        pointer-events: none; filter: blur(20px);
+    h1, h2 { animation: pulse 3s infinite; }
+    
+    .artista-card { 
+        position: relative; 
+        overflow: hidden; 
+        transition: all 0.4s ease;
+    }
+    .artista-card::after {
+        content: ''; position: absolute; top: 0; left: -100%;
+        width: 100%; height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+        transition: 0.6s;
+    }
+    .artista-card:hover::after { left: 100%; }
+    
+    .container { 
+        border-left: 1px solid #1a0000; 
+        border-right: 1px solid #1a0000; 
+        min-height: 100vh;
     }
 `;
 document.head.appendChild(style);
