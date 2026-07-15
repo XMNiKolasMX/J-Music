@@ -1,3 +1,6 @@
+Aquí tienes tu archivo `main.js` completo, consolidado y optimizado con el ID de lista de reproducción que me proporcionaste. Está listo para funcionar con tu estructura HTML.
+
+```javascript
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Sistema de Archivo J-Music Cargado. Inicializando protocolos de preservación...");
 
@@ -40,7 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 4. Aparición dramática con ScrollReveal
+    // 4. Aparición dramática con IntersectionObserver
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
             if (entry.isIntersecting) {
@@ -96,7 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// 8. Carga de la API de YouTube para el reproductor
+// 8. Carga de la API de YouTube y configuración del Reproductor
 const tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
 const firstScriptTag = document.getElementsByTagName('script')[0];
@@ -109,12 +112,12 @@ function onYouTubeIframeAPIReady() {
         width: '0',
         playerVars: { 
             'listType': 'playlist', 
-            'list': 'PLj0WVlmQfWtiY_cmCHq-mz7EVzg3dzV11' 
+            'list': 'PLj0WVlmQfWtiY_cmCHq-mz7EVzg3dzV11' // ID de lista actualizado
         }
     });
 }
 
-// Funciones para los botones del footer
+// Funciones para los botones del reproductor en el footer
 function togglePlay() {
     const btn = document.getElementById('main-play-btn');
     if (player && player.getPlayerState() === 1) {
@@ -158,3 +161,5 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
+
+```
