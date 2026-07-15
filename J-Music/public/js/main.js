@@ -102,22 +102,24 @@ window.onYouTubeIframeAPIReady = function() {
     });
 };
 
-// Funciones control
+// Funciones control seguras
 function togglePlay() {
     const btn = document.getElementById('main-play-btn');
-    if (!player) { console.error("El reproductor aún no se ha cargado."); return; }
-    
-    if (player.getPlayerState() === 1) {
-        player.pauseVideo();
-        btn.innerText = '▶';
+    if (typeof player !== 'undefined' && player.getPlayerState) {
+        if (player.getPlayerState() === 1) { // 1 = reproduciendo
+            player.pauseVideo();
+            btn.innerText = '▶';
+        } else {
+            player.playVideo();
+            btn.innerText = '⏸';
+        }
     } else {
-        player.playVideo();
-        btn.innerText = '⏸';
+        console.warn("Reproductor no inicializado. Espera un momento.");
     }
 }
-function nextTrack() { if (player) player.nextVideo(); }
-function prevTrack() { if (player) player.previousVideo(); }
-function setVolume(v) { if (player) player.setVolume(v); }
+function nextTrack() { if (typeof player !== 'undefined' && player.nextVideo) player.nextVideo(); }
+function prevTrack() { if (typeof player !== 'undefined' && player.previousVideo) player.previousVideo(); }
+function setVolume(v) { if (typeof player !== 'undefined' && player.setVolume) player.setVolume(v); }
 
 // Estilos inyectados
 const style = document.createElement('style');
