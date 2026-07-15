@@ -1,19 +1,19 @@
 <hr>
 <footer>
     <div class="footer-content" style="text-align: center; padding-bottom: 20px;">
-        <!-- Contenedor invisible para la API de YouTube -->
-        <div id="player" style="display:none;"></div>
+        <!-- Contenedor del reproductor -->
+        <div id="player" style="position: absolute; left: -9999px; visibility: hidden;"></div>
 
         <!-- Reproductor Estilo Industrial/Gótico -->
         <div class="custom-player">
             <div class="player-header">● J-MUSIC_STREAMING_NODE_ACTIVE</div>
             <div class="controls">
-                <button onclick="prevTrack()" title="Anterior">⏮</button>
-                <button id="main-play-btn" onclick="togglePlay()" title="Play/Pause">▶</button>
-                <button onclick="nextTrack()" title="Siguiente">⏭</button>
+                <button id="btn-prev" title="Anterior">⏮</button>
+                <button id="main-play-btn" title="Play/Pause">▶</button>
+                <button id="btn-next" title="Siguiente">⏭</button>
                 <div class="volume-control">
                     <span style="font-size: 0.6rem;">VOL</span>
-                    <input type="range" id="vol-slider" min="0" max="100" value="80" oninput="setVolume(this.value)">
+                    <input type="range" id="vol-slider" min="0" max="100" value="80">
                 </div>
             </div>
         </div>
@@ -23,36 +23,3 @@
         </p>
     </div>
 </footer>
-
-<script>
-    // Configuración de la API y controles
-    let player;
-    function onYouTubeIframeAPIReady() {
-        player = new YT.Player('player', {
-            height: '0', 
-            width: '0',
-            playerVars: { 
-                'listType': 'playlist', 
-                'list': 'PLujyq4vbUunu9zFP9mvTYIkCbbhUZ1-9D' 
-            }
-        });
-    }
-
-    function togglePlay() {
-        const btn = document.getElementById('main-play-btn');
-        if (player.getPlayerState() === 1) {
-            player.pauseVideo();
-            btn.innerText = '▶';
-        } else {
-            player.playVideo();
-            btn.innerText = '⏸';
-        }
-    }
-
-    function nextTrack() { player.nextVideo(); }
-    function prevTrack() { player.previousVideo(); }
-    function setVolume(v) { player.setVolume(v); }
-</script>
-
-</body>
-</html>
