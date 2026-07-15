@@ -1,33 +1,12 @@
 /**
- * main.js - Sistema J-Music Archive
- * Integración con YouTube Iframe API
+ * main.js - J-MUSIC ARCHIVE SYSTEM
+ * Versión de diagnóstico total
  */
 
-// --- 1. Inicialización de UI y Efectos ---
+// --- 1. Lógica de UI ---
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Sistema de Archivo J-Music Cargado.");
-
-    // Barra de progreso
-    const progressBar = document.createElement('div');
-    progressBar.id = 'progress-bar';
-    document.body.appendChild(progressBar);
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.scrollY;
-        const docHeight = document.body.offsetHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-        progressBar.style.width = scrollPercent + '%';
-    });
-
-    // Efecto de Glitch
-    const titles = document.querySelectorAll('h1, h2');
-    titles.forEach(t => setInterval(() => { if(Math.random() > 0.85) {
-        t.style.textShadow = '3px 0 #ff0000, -3px 0 #000';
-        t.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
-        setTimeout(() => { t.style.textShadow = '0 0 10px #ff0000'; t.style.transform = 'translateX(0)'; }, 100);
-    }}, 3000));
-
-    // Seguimiento de mouse y observadores (Tu lógica original)
-    // ...
+    console.log("Sistema cargado...");
+    // [Aquí mantén tus efectos de Glitch, Barra de progreso, Terminal, etc.]
 });
 
 // --- 2. Carga API YouTube ---
@@ -38,52 +17,55 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let player;
 
-// Esta función es llamada automáticamente por la API de YouTube
 window.onYouTubeIframeAPIReady = function() {
-    console.log("YouTube API Ready. Creando reproductor...");
+    console.log("API de YouTube inicializada.");
     player = new YT.Player('player', {
-        height: '360', 
-        width: '640',
+        height: '1',
+        width: '1',
         playerVars: { 
             'listType': 'playlist', 
             'list': 'PLj0WVlmQfWtiY_cmCHq-mz7EVzg3dzV11',
-            'origin': window.location.origin
+            'autoplay': 0,
+            'rel': 0
         },
         events: {
-            'onReady': () => console.log("Reproductor listo para comandos."),
-            'onError': (e) => console.error("Error de YouTube (Código):", e.data),
-            'onStateChange': (e) => console.log("Estado del reproductor:", e.data)
+            'onReady': (e) => {
+                console.log("¡Reproductor listo para recibir comandos!");
+                // Habilitamos el botón visualmente
+                document.getElementById('main-play-btn').style.opacity = "1";
+            },
+            'onError': (e) => {
+                console.error("ERROR CRÍTICO DE YOUTUBE. Código:", e.data);
+                console.error("Si el código es 100 o 150, la lista está bloqueada por Copyright.");
+            },
+            'onStateChange': (e) => {
+                console.log("Estado de la API:", e.data);
+            }
         }
     });
 };
 
-// --- 3. Funciones de Control (Exposición Global) ---
+// --- 3. Funciones Globales ---
 window.togglePlay = function() {
     if (!player || typeof player.getPlayerState !== 'function') {
-        console.error("El objeto 'player' no está inicializado.");
+        alert("El reproductor aún no se ha cargado. Espera un segundo.");
         return;
     }
 
     const state = player.getPlayerState();
     const btn = document.getElementById('main-play-btn');
-    
-    if (state === 1) { // 1 = Reproduciendo
+
+    // 1: Reproduciendo, 2: Pausado, -1: No iniciado, 3: Buffering
+    if (state === 1) {
         player.pauseVideo();
-        if(btn) btn.innerText = '▶';
+        btn.innerText = '▶';
     } else {
+        console.log("Intentando reproducir...");
         player.playVideo();
-        if(btn) btn.innerText = '⏸';
+        btn.innerText = '⏸';
     }
 };
 
 window.nextTrack = function() { if (player) player.nextVideo(); };
 window.prevTrack = function() { if (player) player.previousVideo(); };
 window.setVolume = function(v) { if (player) player.setVolume(v); };
-
-// --- 4. Estilos inyectados ---
-const style = document.createElement('style');
-style.innerHTML = `
-    #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: #ff0000; z-index: 10000; }
-    #player { display: block; opacity: 0; position: absolute; }
-`;
-document.head.appendChild(style);
