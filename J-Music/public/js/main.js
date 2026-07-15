@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
         progressBar.style.width = scrollPercent + '%';
     });
 
-    // 2. Efecto de Glitch aleatorio en títulos (añade inestabilidad estética)
+    // 2. Efecto de Glitch aleatorio en títulos
     const titles = document.querySelectorAll('h1, h2');
     const triggerGlitch = (el) => {
         el.style.textShadow = '3px 0 #ff0000, -3px 0 #000';
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // 5. Efecto "Terminal de Comando" al pie de página
+    // 5. Efecto "Terminal de Comando"
     const terminal = document.createElement('div');
     terminal.id = "terminal-msg";
     terminal.style.cssText = "position:fixed; bottom:10px; left:10px; color: #550000; font-family: monospace; font-size: 9px; pointer-events:none; z-index:9999;";
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
         i++;
     }, 4000);
 
-    // 6. Efecto de "Ruido Visual" dinámico (Glitch de pantalla completa)
+    // 6. Efecto de "Ruido Visual"
     const glitchOverlay = document.createElement('div');
     glitchOverlay.style.cssText = "position:fixed; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:9998; opacity:0; background: rgba(255,0,0,0.05);";
     document.body.appendChild(glitchOverlay);
@@ -80,9 +80,9 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(() => {
         glitchOverlay.style.opacity = 0.1;
         setTimeout(() => glitchOverlay.style.opacity = 0, 50);
-    }, 10000); // Un "parpadeo" de error cada 10 segundos
+    }, 10000);
 
-    // 7. Cursor Magnético (efecto sobre enlaces)
+    // 7. Cursor Magnético
     const links = document.querySelectorAll('a');
     links.forEach(link => {
         link.addEventListener('mouseenter', () => {
@@ -95,6 +95,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// 8. Carga de la API de YouTube para el reproductor
+const tag = document.createElement('script');
+tag.src = "https://www.youtube.com/iframe_api";
+const firstScriptTag = document.getElementsByTagName('script')[0];
+firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '0', 
+        width: '0',
+        playerVars: { 
+            'listType': 'playlist', 
+            'list': 'PLujyq4vbUunu9zFP9mvTYIkCbbhUZ1-9D' 
+        }
+    });
+}
+
+// Funciones para los botones del footer
+function togglePlay() {
+    const btn = document.getElementById('main-play-btn');
+    if (player && player.getPlayerState() === 1) {
+        player.pauseVideo();
+        btn.innerText = '▶';
+    } else if (player) {
+        player.playVideo();
+        btn.innerText = '⏸';
+    }
+}
+function nextTrack() { if (player) player.nextVideo(); }
+function prevTrack() { if (player) player.previousVideo(); }
+function setVolume(v) { if (player) player.setVolume(v); }
 
 // Estilos dinámicos inyectados
 const style = document.createElement('style');
