@@ -1,11 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Sistema de Archivo J-Music Cargado. Inicializando protocolos de preservación...");
 
-    // 1. Barra de progreso de lectura
+    // 1. Barra de progreso
     const progressBar = document.createElement('div');
     progressBar.id = 'progress-bar';
     document.body.appendChild(progressBar);
-
     window.addEventListener('scroll', () => {
         const scrollTop = window.scrollY;
         const docHeight = document.body.offsetHeight - window.innerHeight;
@@ -15,17 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 2. Efecto de Glitch
     const titles = document.querySelectorAll('h1, h2');
-    const triggerGlitch = (el) => {
-        el.style.textShadow = '3px 0 #ff0000, -3px 0 #000';
-        el.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
-        setTimeout(() => { 
-            el.style.textShadow = '0 0 10px #ff0000'; 
-            el.style.transform = 'translateX(0)';
-        }, 100);
-    };
-    titles.forEach(t => {
-        setInterval(() => { if(Math.random() > 0.85) triggerGlitch(t); }, 3000);
-    });
+    titles.forEach(t => setInterval(() => { if(Math.random() > 0.85) {
+        t.style.textShadow = '3px 0 #ff0000, -3px 0 #000';
+        t.style.transform = `translateX(${Math.random() * 4 - 2}px)`;
+        setTimeout(() => { t.style.textShadow = '0 0 10px #ff0000'; t.style.transform = 'translateX(0)'; }, 100);
+    }}, 3000));
 
     // 3. Seguimiento de mouse
     const cards = document.querySelectorAll('.artista-card, section');
@@ -102,31 +95,32 @@ window.onYouTubeIframeAPIReady = function() {
     });
 };
 
-// Funciones control seguras
-function togglePlay() {
+// --- Funciones expuestas al objeto window para evitar "undefined" en el HTML ---
+window.togglePlay = function() {
     const btn = document.getElementById('main-play-btn');
-    if (typeof player !== 'undefined' && player.getPlayerState) {
-        if (player.getPlayerState() === 1) { // 1 = reproduciendo
+    if (player && typeof player.getPlayerState === 'function') {
+        if (player.getPlayerState() === 1) { 
             player.pauseVideo();
-            btn.innerText = '▶';
+            if(btn) btn.innerText = '▶';
         } else {
             player.playVideo();
-            btn.innerText = '⏸';
+            if(btn) btn.innerText = '⏸';
         }
     } else {
         console.warn("Reproductor no inicializado. Espera un momento.");
     }
-}
-function nextTrack() { if (typeof player !== 'undefined' && player.nextVideo) player.nextVideo(); }
-function prevTrack() { if (typeof player !== 'undefined' && player.previousVideo) player.previousVideo(); }
-function setVolume(v) { if (typeof player !== 'undefined' && player.setVolume) player.setVolume(v); }
+};
+
+window.nextTrack = function() { if (player && player.nextVideo) player.nextVideo(); };
+window.prevTrack = function() { if (player && player.previousVideo) player.previousVideo(); };
+window.setVolume = function(v) { if (player && player.setVolume) player.setVolume(v); };
 
 // Estilos inyectados
 const style = document.createElement('style');
 style.innerHTML = `
+    #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: #ff0000; z-index: 10000; transition: width 0.2s; }
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
     h1, h2 { animation: pulse 3s infinite; }
-    .artista-card { position: relative; overflow: hidden; transition: all 0.4s ease; }
     .container { border-left: 1px solid #1a0000; border-right: 1px solid #1a0000; min-height: 100vh; }
 `;
 document.head.appendChild(style);
