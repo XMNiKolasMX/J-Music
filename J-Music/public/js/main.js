@@ -1,6 +1,3 @@
-Aquí tienes tu archivo `main.js` completo, consolidado y optimizado con el ID de lista de reproducción que me proporcionaste. Está listo para funcionar con tu estructura HTML.
-
-```javascript
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Sistema de Archivo J-Music Cargado. Inicializando protocolos de preservación...");
 
@@ -161,5 +158,3 @@ style.innerHTML = `
     }
 `;
 document.head.appendChild(style);
-
-```
