@@ -1,6 +1,83 @@
-<!-- Archivo: views/index-partial.ejs -->
+<!-- views/index-partial.ejs -->
 <main class="container">
-    <!-- ... TODO TU CONTENIDO HTML ACTUAL (DESDE <main> HASTA EL ÚLTIMO </section>) ... -->
-</main>
+    <section class="bienvenida">
+        <h1>Bienvenido a J-Music</h1>
+        <p>El santuario definitivo para los amantes del Visual Kei y J-Rock en general.</p>
+        
+        <div class="caja-imagenes">
+            <!-- Imagen Izquierda -->
+            <img src="/img/Malice Mizer.jpg" alt="Concierto Malice Mizer">
+            
+            <!-- Imagen Derecha -->
+            <img src="/img/kuroyuri.jpg" alt="Otra banda en vivo">
+        </div>
+    </section>
 
-</div> <!-- ESTO ES VITAL: Cierra el div id="main-content" que está en el header.ejs -->
+    <section class="descripcion">
+        <h2>Un viaje a través de las décadas</h2>
+        <p>Nuestro archivo no tiene límites temporales. Nos dedicamos a rastrear la historia del Visual Kei desde sus cimientos más crudos hasta la vanguardia actual.</p>
+        
+        <div class="cronologia" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
+            <div class="epoca">
+                <h3>80s & 90s</h3>
+                <div class="galeria-4">
+                    <div class="epoca-img-container">
+                        <img src="/img/X.jpg" alt="X Japan">
+                        <div class="overlay">X Japan</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/LUNASEA.jpg" alt="LUNA SEA">
+                        <div class="overlay">LUNA SEA</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/buck-tick.jpg" alt="BUCK-TICK">
+                        <div class="overlay">BUCK-TICK</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/Dir En Grey.jpg" alt="DIR EN GREY">
+                        <div class="overlay">DIR EN GREY</div>
+                    </div>
+                </div>
+                <p>La era dorada del maquillaje pesado y el sonido underground.</p>
+            </div>
+            
+            <div class="epoca">
+                <h3>2000s - ACTUALIDAD</h3>
+                <div class="galeria-4">
+                    <div class="epoca-img-container">
+                        <img src="/img/Nightmare.jpg" alt="NIGHTMARE">
+                        <div class="overlay">NIGHTMARE</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/Alice Nine_.jpg" alt="ALICE NINE">
+                        <div class="overlay">ALICE NINE</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/VERSAILLES.jpg" alt="VERSAILLES">
+                        <div class="overlay">VERSAILLES</div>
+                    </div>
+                    <div class="epoca-img-container">
+                        <img src="/img/Moi dix Mois.jpg" alt="Moi dix Mois">
+                        <div class="overlay">Moi dix Mois</div>
+                    </div>
+                </div>
+                <p>La explosión global y la evolución hacia sonidos más alternativos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="filosofia">
+        <h2>Nuestro Compromiso</h2>
+        <p>En J-Music, no nos limitamos a coleccionar; nos dedicamos a la preservación activa. Entendemos que cada era del Visual Kei —desde los orígenes crudos y experimentales de los 80 hasta las superproducciones visuales de la actualidad— constituye un tesoro histórico invaluable que merece ser salvaguardado. Nuestra filosofía de trabajo es rigurosa y se fundamenta en el respeto absoluto hacia la obra original.</p>
+
+        <p><strong>El Proceso de Rescate:</strong></p>
+        <p>Nuestro flujo de trabajo es un ciclo constante de búsqueda y restauración. No dependemos de fuentes externas dudosas; nosotros mismos rastreamos minuciosamente el mercado global para localizar los ejemplares físicos. Cuando un material es escaso o inexistente en formato digital, invertimos en la compra directa de <strong>DVDs, Blu-rays y, fundamentalmente, cintas VHS originales</strong>. Somos conscientes de que el VHS es un formato que requiere un cuidado especial: no es posible traer el formato físico original a manos de cada fan, por lo que asumimos la responsabilidad técnica de realizar un proceso de digitalización (ripeo) de alta fidelidad, asegurando que la esencia de la grabación no se degrade en el proceso de conversión a formatos digitales modernos.</p>
+
+        <p><strong>Metodología de Distribución:</strong></p>
+        <p>Una vez que el material ha sido digitalizado, no permitimos que se pierda en un disco duro personal. Nuestra misión es la difusión abierta. Por ello, subimos cada pieza a plataformas de almacenamiento robustas y accesibles, como <strong>TeraBox</strong>. Sabemos que la estabilidad es clave, por lo que cada concierto, documental o videoclip es meticulosamente organizado, categorizado y, en los casos de archivos pesados, dividido en varias partes. Esta estructura de subida garantiza que cualquier miembro de la comunidad, independientemente de su infraestructura técnica, pueda realizar una descarga estable y exitosa.</p>
+
+        <p><strong>¿Por qué este esfuerzo en pleno 2026?</strong></p>
+        <p>Vivimos en una época de transición donde el soporte físico está desapareciendo a pasos agigantados. Los reproductores de DVD y cintas se están convirtiendo en antigüedades difíciles de mantener, y la industria del entretenimiento ha priorizado lo efímero. Al realizar este trabajo de preservación, estamos evitando que nuestra cultura musical caiga en un "agujero negro" digital. Estamos construyendo un archivo vivo, una biblioteca pública de alta calidad que garantiza que el trabajo de los artistas nipones no desaparezca junto con sus soportes originales. Nuestro compromiso es que, sin importar los años que pasen, el acceso a la historia del Visual Kei siga siendo un derecho de todos los fans y no el privilegio de unos pocos coleccionistas con el equipo necesario para reproducir formatos obsoletos.</p>
+    </section>
+</main>
+</div> <!-- Cierre del div id="main-content" que está en header.ejs -->
