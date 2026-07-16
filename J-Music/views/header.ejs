@@ -3,17 +3,9 @@
 <head>
     <title>J-Music</title>
     <link rel="stylesheet" href="/css/style.css">
-    <!-- Paso 1: Incluimos la librería HTMX -->
-    <script src="https://unpkg.com/htmx.org@2.0.0"></script>
 </head>
 <body>
     <nav>
-        <!-- Paso 2: Agregamos los atributos hx- para navegación sin recarga -->
-        <a href="/" hx-get="/" hx-target="#main-content" hx-push-url="true">Inicio</a> | 
-        <a href="/artistas" hx-get="/artistas" hx-target="#main-content" hx-push-url="true">Artistas</a> | 
-        <a href="/sobre-nosotros" hx-get="/sobre-nosotros" hx-target="#main-content" hx-push-url="true">Sobre Nosotros</a>
+        <a href="/">Inicio</a> | <a href="/artistas">Artistas</a> | <a href="/sobre-nosotros">Sobre Nosotros</a>
     </nav>
     <hr>
-
-    <!-- Paso 3: Definimos el contenedor donde cambiará el contenido -->
-    <div id="main-content">
