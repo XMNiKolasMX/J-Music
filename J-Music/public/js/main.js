@@ -1,12 +1,40 @@
 /**
  * main.js - J-MUSIC ARCHIVE SYSTEM
- * Versión de diagnóstico total
+ * Versión de navegación persistente
  */
 
-// --- 1. Lógica de UI ---
+// --- 1. Lógica de UI y Navegación Dinámica ---
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Sistema cargado...");
-    // [Aquí mantén tus efectos de Glitch, Barra de progreso, Terminal, etc.]
+
+    // Interceptar clics en los enlaces de navegación para evitar recargas
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', async (e) => {
+            e.preventDefault();
+            const url = e.target.getAttribute('href');
+            
+            try {
+                const response = await fetch(url);
+                const htmlText = await response.text();
+                
+                // Convertir el texto a un documento DOM virtual
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
+                
+                // Reemplazar solo el contenido dentro de <main>
+                const newMain = doc.querySelector('main');
+                const currentMain = document.querySelector('main');
+                
+                if (newMain && currentMain) {
+                    currentMain.innerHTML = newMain.innerHTML;
+                    // Actualizar URL en el navegador sin recargar
+                    window.history.pushState({}, '', url);
+                }
+            } catch (err) {
+                console.error("Error al cargar la página:", err);
+            }
+        });
+    });
 });
 
 // --- 2. Carga API YouTube ---
@@ -31,21 +59,17 @@ window.onYouTubeIframeAPIReady = function() {
         events: {
             'onReady': (e) => {
                 console.log("¡Reproductor listo para recibir comandos!");
-                // Habilitamos el botón visualmente
-                document.getElementById('main-play-btn').style.opacity = "1";
+                const playBtn = document.getElementById('main-play-btn');
+                if (playBtn) playBtn.style.opacity = "1";
             },
             'onError': (e) => {
                 console.error("ERROR CRÍTICO DE YOUTUBE. Código:", e.data);
-                console.error("Si el código es 100 o 150, la lista está bloqueada por Copyright.");
-            },
-            'onStateChange': (e) => {
-                console.log("Estado de la API:", e.data);
             }
         }
     });
 };
 
-// --- 3. Funciones Globales ---
+// --- 3. Funciones Globales de Control ---
 window.togglePlay = function() {
     if (!player || typeof player.getPlayerState !== 'function') {
         alert("El reproductor aún no se ha cargado. Espera un segundo.");
@@ -55,17 +79,32 @@ window.togglePlay = function() {
     const state = player.getPlayerState();
     const btn = document.getElementById('main-play-btn');
 
-    // 1: Reproduciendo, 2: Pausado, -1: No iniciado, 3: Buffering
-    if (state === 1) {
+    if (state === 1) { // Reproduciendo
         player.pauseVideo();
-        btn.innerText = '▶';
-    } else {
-        console.log("Intentando reproducir...");
+        if (btn) btn.innerText = '▶';
+    } else { // Pausado o no iniciado
         player.playVideo();
-        btn.innerText = '⏸';
+        if (btn) btn.innerText = '⏸';
     }
 };
 
 window.nextTrack = function() { if (player) player.nextVideo(); };
 window.prevTrack = function() { if (player) player.previousVideo(); };
 window.setVolume = function(v) { if (player) player.setVolume(v); };
+
+// --- 4. Efecto de aparición para el reproductor ---
+const playerWrapper = document.querySelector('.youtube-player-wrapper');
+if (playerWrapper) {
+    playerWrapper.style.opacity = 0;
+    playerWrapper.style.transition = 'opacity 2s ease';
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = 1;
+            }
+        });
+    }, { threshold: 0.1 });
+    
+    observer.observe(playerWrapper);
+}
