@@ -7,7 +7,6 @@
         <div class="lista-artistas">
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
-                    <!-- Usamos directamente la URL completa de Supabase -->
                     <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
                     
                     <h3><%= artista.nombre %></h3>
@@ -19,6 +18,20 @@
     <% } else { %>
         <p>No se encontraron artistas en la base de datos.</p>
     <% } %>
+
+    <!-- Sección ampliada -->
+    <section class="nota-informativa" style="margin-top: 40px; padding: 20px; background-color: #f4f4f9; border-left: 5px solid #555; border-radius: 4px;">
+        <h3 style="margin-top: 0;">Información sobre el formato de los DVD</h3>
+        <p>
+            ¿Tu DVD no tiene menú? No te preocupes, es algo totalmente normal en los lanzamientos de bandas de <em>Visual Kei</em> y música japonesa. 
+        </p>
+        <p>
+            Si un DVD incluye <strong>solo video musical, <em>making-of</em> o comentarios de la banda</strong>, y presenta únicamente uno de estos tres contenidos, es habitual que el disco <strong>no incluya menú de DVD</strong>.
+        </p>
+        <p>
+            Estas ediciones suelen estar diseñadas con una configuración de "reproducción automática" (autorun) para que el contenido comience inmediatamente al insertar el disco, manteniendo un enfoque directo y minimalista muy propio de la industria musical en Japón. Si el contenido es breve o específico, el formato prescinde de menús interactivos para agilizar la experiencia del fan.
+        </p>
+    </section>
 </main>
 
 <%- include('footer') %>
