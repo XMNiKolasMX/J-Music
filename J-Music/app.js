@@ -58,10 +58,10 @@ app.get('/detalle/:id', async (req, res) => {
             .single();
 
         const { data: videos, error: errorVideos } = await supabase
-            .from('videografia')
-            .select('*')
-            .eq('artista_id', artistaId);
-            .order('fecha_lanzamiento', { ascending: true });
+    .from('videografia')
+    .select('*')
+    .eq('artista_id', artistaId) // Asegúrate de que aquí NO haya punto y coma
+    .order('fecha_lanzamiento', { ascending: true }); // Aquí sí debe terminar la sentencia
 
         if (errorArtista) throw errorArtista;
         if (errorVideos) throw errorVideos;
