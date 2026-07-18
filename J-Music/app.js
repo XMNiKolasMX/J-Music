@@ -61,6 +61,7 @@ app.get('/detalle/:id', async (req, res) => {
             .from('videografia')
             .select('*')
             .eq('artista_id', artistaId);
+            .order('fecha_lanzamiento', { ascending: true });
 
         if (errorArtista) throw errorArtista;
         if (errorVideos) throw errorVideos;
