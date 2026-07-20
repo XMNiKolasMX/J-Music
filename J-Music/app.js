@@ -26,20 +26,30 @@ app.get('/', async (req, res) => {
     }
 });
 
-// 2. Lista de Artistas
+// 2. Lista de Artistas (CON FILTRO)
 app.get('/artistas', async (req, res) => {
     try {
-        const { data, error } = await supabase
+        const categoria = req.query.cat; // Captura el parámetro ?cat=...
+        
+        // Iniciamos la consulta base
+        let query = supabase
             .from('artistas')
             .select('*')
             .order('nombre', { ascending: true });
 
+        // Si existe un filtro de categoría, lo aplicamos
+        if (categoria) {
+            query = query.eq('categoria', categoria);
+        }
+
+        const { data, error } = await query;
+
         if (error) throw error;
 
-        // DEBUG: Esto te ayudará a ver en tu consola si la columna imagen_url trae datos
-        console.log("Datos de artistas recibidos:", JSON.stringify(data, null, 2));
-
-        res.render('artista', { artistas: data });
+        res.render('artista', { 
+            artistas: data, 
+            categoriaActual: categoria || 'Todos' 
+        });
     } catch (err) {
         console.error('Error en la consulta de artistas:', err);
         res.status(500).send('Error al obtener los artistas');
@@ -58,10 +68,10 @@ app.get('/detalle/:id', async (req, res) => {
             .single();
 
         const { data: videos, error: errorVideos } = await supabase
-    .from('videografia')
-    .select('*')
-    .eq('artista_id', artistaId) // Asegúrate de que aquí NO haya punto y coma
-    .order('fecha_lanzamiento', { ascending: true }); // Aquí sí debe terminar la sentencia
+            .from('videografia')
+            .select('*')
+            .eq('artista_id', artistaId)
+            .order('fecha_lanzamiento', { ascending: true });
 
         if (errorArtista) throw errorArtista;
         if (errorVideos) throw errorVideos;
