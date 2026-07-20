@@ -26,29 +26,28 @@ app.get('/', async (req, res) => {
     }
 });
 
-// 2. Lista de Artistas (CON FILTRO)
+// 2. Lista de Artistas (Con lógica de filtro por categoría)
 app.get('/artistas', async (req, res) => {
     try {
         const categoria = req.query.cat; // Captura el parámetro ?cat=...
+        let data = [];
         
-        // Iniciamos la consulta base
-        let query = supabase
-            .from('artistas')
-            .select('*')
-            .order('nombre', { ascending: true });
-
-        // Si existe un filtro de categoría, lo aplicamos
+        // Si hay una categoría seleccionada, filtramos la consulta
         if (categoria) {
-            query = query.eq('categoria', categoria);
+            const { data: filteredData, error } = await supabase
+                .from('artistas')
+                .select('*')
+                .eq('categoria', categoria)
+                .order('nombre', { ascending: true });
+            
+            if (error) throw error;
+            data = filteredData;
         }
 
-        const { data, error } = await query;
-
-        if (error) throw error;
-
+        // Renderizamos la vista enviando los datos y la categoría activa
         res.render('artista', { 
             artistas: data, 
-            categoriaActual: categoria || 'Todos' 
+            categoriaActual: categoria || null 
         });
     } catch (err) {
         console.error('Error en la consulta de artistas:', err);
