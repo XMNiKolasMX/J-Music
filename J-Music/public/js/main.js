@@ -6,7 +6,23 @@
 // --- 1. Lógica de UI ---
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Sistema cargado...");
-    // [Aquí mantén tus efectos de Glitch, Barra de progreso, Terminal, etc.]
+    
+    // Observador para la aparición suave de elementos (ej. reproductores)
+    const playerWrapper = document.querySelector('.youtube-player-wrapper');
+    if (playerWrapper) {
+        playerWrapper.style.opacity = 0;
+        playerWrapper.style.transition = 'opacity 2s ease';
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+        
+        observer.observe(playerWrapper);
+    }
 });
 
 // --- 2. Carga API YouTube ---
@@ -31,12 +47,11 @@ window.onYouTubeIframeAPIReady = function() {
         events: {
             'onReady': (e) => {
                 console.log("¡Reproductor listo para recibir comandos!");
-                // Habilitamos el botón visualmente
-                document.getElementById('main-play-btn').style.opacity = "1";
+                const playBtn = document.getElementById('main-play-btn');
+                if(playBtn) playBtn.style.opacity = "1";
             },
             'onError': (e) => {
                 console.error("ERROR CRÍTICO DE YOUTUBE. Código:", e.data);
-                console.error("Si el código es 100 o 150, la lista está bloqueada por Copyright.");
             },
             'onStateChange': (e) => {
                 console.log("Estado de la API:", e.data);
@@ -55,14 +70,13 @@ window.togglePlay = function() {
     const state = player.getPlayerState();
     const btn = document.getElementById('main-play-btn');
 
-    // 1: Reproduciendo, 2: Pausado, -1: No iniciado, 3: Buffering
     if (state === 1) {
         player.pauseVideo();
-        btn.innerText = '▶';
+        if(btn) btn.innerText = '▶';
     } else {
         console.log("Intentando reproducir...");
         player.playVideo();
-        btn.innerText = '⏸';
+        if(btn) btn.innerText = '⏸';
     }
 };
 
