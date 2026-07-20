@@ -1,73 +1,40 @@
- <%- include('header') %>
-
-
+<%- include('header') %>
 
 <main class="container">
-
     <h1>Lista de Artistas</h1>
 
-    
-
-    <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
-
-        <div class="lista-artistas">
-
-            <% artistas.forEach(artista => { %>
-
-                <div class="artista-card">
-
-                    <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
-
-                    
-
-                    <h3><%= artista.nombre %></h3>
-
-                    <p><%= artista.biografia %></p>
-
-                    <a href="/detalle/<%= artista.id %>">Ver más</a>
-
-                </div>
-
-            <% }) %>
-
-        </div>
-
-    <% } else { %>
-
-        <p>No se encontraron artistas en la base de datos.</p>
-
-    <% } %>
-
-
-
-    <!-- Sección ampliada -->
-
-    <section class="nota-informativa" style="margin-top: 40px; padding: 20px; background-color: #f4f4f9; border-left: 5px solid #555; border-radius: 4px;">
-
-        <h3 style="margin-top: 0;">Información sobre el formato de los DVD</h3>
-
+    <!-- Nota Informativa Movida arriba -->
+    <section class="nota-informativa" style="margin-bottom: 30px; padding: 20px; background-color: #0a0a0a; border-left: 5px solid #8b0000; border-radius: 4px;">
+        <h3 style="margin-top: 0; color: #ff0000;">Sobre el contenido del archivo</h3>
         <p>
-
-            ¿Tu DVD no tiene menú? No te preocupes, es algo totalmente normal en los lanzamientos de bandas de <em>Visual Kei</em> y música japonesa. 
-
+            Este archivo contiene una colección curada de <strong>DVDs, Blu-rays y VHS ripeados</strong>, abarcando tanto el espectro del <em>Visual Kei</em> como del <em>J-Rock</em> en general. 
         </p>
-
         <p>
-
-            Si un DVD incluye <strong>solo video musical, <em>making-of</em> o comentarios de la banda</strong>, y presenta únicamente uno de estos tres contenidos, es habitual que el disco <strong>no incluya menú de DVD</strong>.
-
+            ¿Tu DVD o material no tiene menú? Es totalmente normal. En los lanzamientos japoneses, si un disco incluye solo video musical, <em>making-of</em> o comentarios, es habitual que <strong>no incluya menú interactivo</strong>. Estas ediciones están diseñadas para reproducción automática (autorun), manteniendo un enfoque minimalista y directo, muy propio de la industria musical en Japón.
         </p>
-
-        <p>
-
-            Estas ediciones suelen estar diseñadas con una configuración de "reproducción automática" (autorun) para que el contenido comience inmediatamente al insertar el disco, manteniendo un enfoque directo y minimalista muy propio de la industria musical en Japón. Si el contenido es breve o específico, el formato prescinde de menús interactivos para agilizar la experiencia del fan.
-
-        </p>
-
     </section>
 
+    <!-- Buscador -->
+    <div class="search-container" style="text-align: center; margin: 30px 0;">
+        <input type="text" id="buscador" placeholder="Buscar artista..." 
+               onkeyup="filtrarArtistas()" 
+               style="padding: 10px; width: 300px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px;">
+    </div>
+    
+    <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
+        <div class="lista-artistas" id="lista-artistas">
+            <% artistas.forEach(artista => { %>
+                <div class="artista-card">
+                    <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
+                    <h3><%= artista.nombre %></h3>
+                    <p><%= artista.biografia %></p>
+                    <a href="/detalle/<%= artista.id %>">Ver más</a>
+                </div>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p>No se encontraron artistas en la base de datos.</p>
+    <% } %>
 </main>
-
-
 
 <%- include('footer') %>
