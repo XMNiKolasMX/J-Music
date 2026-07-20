@@ -2,12 +2,20 @@
 
 <main class="container">
     <h1>Lista de Artistas</h1>
+
+    <!-- Botones de Filtro -->
+    <div class="filtros-artistas" style="text-align: center; margin: 30px 0;">
+        <a href="/artistas" class="btn-filtro <%= categoriaActual === 'Todos' ? 'active' : '' %>">Todos</a>
+        <a href="/artistas?cat=Visual Kei" class="btn-filtro <%= categoriaActual === 'Visual Kei' ? 'active' : '' %>">Visual Kei 80's - ACTUALIDAD</a>
+        <a href="/artistas?cat=J-Rock" class="btn-filtro <%= categoriaActual === 'J-Rock' ? 'active' : '' %>">J-Rock</a>
+    </div>
     
     <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
         <div class="lista-artistas">
             <% artistas.forEach(artista => { %>
                 <div class="artista-card">
-                    <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
+                    <!-- Ajuste: Cambiado a 'imagen_url' que es el nombre estándar de la columna -->
+                    <img src="<%= artista.imagen_url %>" alt="<%= artista.nombre %>">
                     
                     <h3><%= artista.nombre %></h3>
                     <p><%= artista.biografia %></p>
@@ -16,7 +24,7 @@
             <% }) %>
         </div>
     <% } else { %>
-        <p>No se encontraron artistas en la base de datos.</p>
+        <p>No se encontraron artistas en esta categoría.</p>
     <% } %>
 
     <!-- Sección ampliada -->
