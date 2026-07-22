@@ -12,16 +12,16 @@
                 <% videos.forEach(video => { %>
                     <div class="artista-card" style="position: relative;">
                         <% 
-                            // Verificamos si existe una fecha de lanzamiento para calcular los días
-                            if (video.fecha_lanzamiento) {
-                                // Reemplazamos los puntos por guiones para que JS reconozca el formato (ej. 2026.07.22 a 2026-07-22)
-                                let fechaLanzamiento = new Date(video.fecha_lanzamiento.replace(/\./g, '-'));
+                            // Verificamos la fecha en que fue SUBIDO/REGISTRADO a la web (no la fecha del disco)
+                            if (video.fecha_registro) {
+                                // Convertimos la fecha de registro y la fecha actual
+                                let fechaRegistro = new Date(video.fecha_registro.replace(/\./g, '-'));
                                 let hoy = new Date();
                                 
-                                // Calculamos la diferencia en milisegundos y la convertimos a días
-                                let diferenciaDias = (hoy - fechaLanzamiento) / (1000 * 60 * 60 * 24);
+                                // Calculamos los días transcurridos desde que se subió a la página
+                                let diferenciaDias = (hoy - fechaRegistro) / (1000 * 60 * 60 * 24);
                                 
-                                // Si tiene 7 días o menos y no es una fecha futura errónea
+                                // Si han pasado 7 días o menos desde que lo agregaste, muestra "Nuevo"
                                 if (diferenciaDias <= 7 && diferenciaDias >= 0) { 
                         %>
                                     <span class="badge-nuevo">Nuevo</span>
@@ -36,7 +36,7 @@
                         
                         <h3><%= video.titulo || 'Sin título' %></h3>
                         
-                        <!-- Mostramos la fecha tal cual viene de la base de datos (AAAA.MM.DD) -->
+                        <!-- Mostramos la fecha de lanzamiento original del disco -->
                         <p>Lanzamiento: <%= video.fecha_lanzamiento || 'N/A' %></p>
                         
                         <div class="botones-container">
