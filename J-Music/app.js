@@ -70,7 +70,7 @@ app.get('/detalle/:id', async (req, res) => {
         if (videos && videos.length > 0) {
             // Calculamos el ID más alto de los registros obtenidos
             const maxId = Math.max(...videos.map(v => v.id));
-            const rangoNuevos = 20; // Rango para abarcar tandas masivas de 10 a 20 elementos
+            const rangoNuevos = 10; // Rango para abarcar tandas masivas de 10 a 20 elementos
 
             videos = videos.map(video => {
                 return {
