@@ -9,26 +9,13 @@
         
         <div class="lista-artistas">
             <% if (typeof videos !== 'undefined' && videos.length > 0) { %>
-                <% videos.forEach(video => { %>
+                <% videos.forEach((video, index) => { %>
                     <div class="artista-card" style="position: relative;">
-                        <% 
-                            // Verificamos la fecha en que fue SUBIDO/REGISTRADO a la web (no la fecha del disco)
-                            if (video.fecha_registro) {
-                                // Convertimos la fecha de registro y la fecha actual
-                                let fechaRegistro = new Date(video.fecha_registro.replace(/\./g, '-'));
-                                let hoy = new Date();
-                                
-                                // Calculamos los días transcurridos desde que se subió a la página
-                                let diferenciaDias = (hoy - fechaRegistro) / (1000 * 60 * 60 * 24);
-                                
-                                // Si han pasado 7 días o menos desde que lo agregaste, muestra "Nuevo"
-                                if (diferenciaDias <= 7 && diferenciaDias >= 0) { 
-                        %>
-                                    <span class="badge-nuevo">Nuevo</span>
-                        <% 
-                                }
-                            } 
-                        %>
+                        
+                        <!-- Si es el primer elemento de la lista (el último agregado), muestra "Nuevo" -->
+                        <% if (index === 0) { %>
+                            <span class="badge-nuevo">Nuevo</span>
+                        <% } %>
 
                         <% if (video.portada_url) { %>
                             <img src="<%= video.portada_url %>" alt="<%= video.titulo %>" referrerpolicy="no-referrer">
@@ -36,7 +23,7 @@
                         
                         <h3><%= video.titulo || 'Sin título' %></h3>
                         
-                        <!-- Mostramos la fecha de lanzamiento original del disco -->
+                        <!-- Muestra la fecha tal cual de la base de datos (AAAA.MM.DD) -->
                         <p>Lanzamiento: <%= video.fecha_lanzamiento || 'N/A' %></p>
                         
                         <div class="botones-container">
