@@ -9,11 +9,11 @@
         
         <div class="lista-artistas">
             <% if (typeof videos !== 'undefined' && videos.length > 0) { %>
-                <% videos.forEach((video, index) => { %>
+                <% videos.forEach((video) => { %>
                     <div class="artista-card" style="position: relative;">
                         
-                        <!-- Si es el primer elemento de la lista (el último agregado), muestra "Nuevo" -->
-                        <% if (index === 0) { %>
+                        <!-- Si el video entra dentro del rango de los últimos agregados, muestra "Nuevo" -->
+                        <% if (video.esNuevo) { %>
                             <span class="badge-nuevo">Nuevo</span>
                         <% } %>
 
