@@ -3,38 +3,56 @@
 <main class="container">
     <h1>Lista de Artistas</h1>
 
-    <!-- Nota Informativa Movida arriba -->
-    <section class="nota-informativa" style="margin-bottom: 30px; padding: 20px; background-color: #0a0a0a; border-left: 5px solid #8b0000; border-radius: 4px;">
-        <h3 style="margin-top: 0; color: #ff0000;">Sobre el contenido del archivo</h3>
-        <p>
-            Esta página contiene archivos DVD's, Blu-rays y VHS ripeados (Solo VHS está ripeado), originales tanto para el Visual Kei y J-Rock en general. Nuestro objetivo es preservar la calidad técnica y visual de estos lanzamientos, asegurando que el material llegue a los fans tal como fue concebido por las bandas y sus discográficas. 
-        </p>
-        <p>
-            ¿Tu DVD o material no tiene menú? Es totalmente normal. En los lanzamientos japoneses, si un disco incluye solo video musical, <em>making-of</em> o comentarios, es habitual que <strong>no incluya menú interactivo</strong>. Estas ediciones están diseñadas para reproducción automática (autorun), manteniendo un enfoque minimalista y directo, muy propio de la industria musical en Japón.
-        </p>
-    </section>
-
-    <!-- Buscador -->
-    <div class="search-container" style="text-align: center; margin: 30px 0;">
-        <input type="text" id="buscador" placeholder="Buscar artista..." 
-               onkeyup="filtrarArtistas()" 
-               style="padding: 10px; width: 300px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px;">
-    </div>
+<!-- Nota Informativa -->
+<section class="nota-informativa" style="margin-bottom: 30px; padding: 25px; background-color: #0a0a0a; border-left: 5px solid #8b0000; border-radius: 4px; line-height: 1.6;">
+    <h3 style="margin-top: 0; color: #ff0000; font-size: 1.25rem; margin-bottom: 15px;">Sobre el contenido del archivo y nuestros criterios</h3>
     
-    <% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
-        <div class="lista-artistas" id="lista-artistas">
-            <% artistas.forEach(artista => { %>
-                <div class="artista-card">
-                    <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
-                    <h3><%= artista.nombre %></h3>
-                    <p><%= artista.biografia %></p>
-                    <a href="/detalle/<%= artista.id %>">Ver más</a>
-                </div>
-            <% }) %>
-        </div>
-    <% } else { %>
-        <p>No se encontraron artistas en la base de datos.</p>
-    <% } %>
-</main>
+    <p>
+        Esta plataforma contiene un archivo especializado en material audiovisual original de <strong>Visual Kei</strong> y <strong>J-Rock</strong>, abarcando formatos físicos como <em>DVDs</em>, <em>Blu-rays</em> y <em>VHS</em> (en el caso de los VHS, se encuentran completamente ripeados para su digitalización). Nuestro principal objetivo es la preservación rigurosa de la calidad técnica, artística y visual de cada lanzamiento, asegurando que el contenido llegue a las manos de los seguidores tal como fue ideado y concebido originalmente por los artistas y sus respectivas discográficas en Japón.
+    </p>
+    
+    <p>
+        ¿Te has dado cuenta de que algunos de tus DVDs o materiales no contienen menú principal? <strong>Es completamente normal.</strong> Dentro de la industria discográfica japonesa, si un disco o material incluye únicamente un video musical específico, un <em>making-of</em> detrás de cámaras o comentarios exclusivos, es una práctica sumamente habitual que carezca de un menú interactivo. Estas ediciones están diseñadas de fábrica para una reproducción directa y automática (modo <em>autorun</em>), manteniendo un concepto estético minimalista y sin distracciones, muy característico del mercado físico nipón.
+    </p>
 
+    <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+
+    <h4 style="color: #fff; margin-bottom: 10px; font-size: 1.1rem;">Política de selección y coleccionismo</h4>
+    <p>
+        Para mantener un estándar de calidad y exclusividad sumamente alto en nuestro catálogo, <strong>no se archiva cualquier tipo de edición</strong>. Exclusivamente se incorporan lanzamientos especiales bajo dos premisas muy estrictas:
+    </p>
+    <ul style="margin-top: 5px; padding-left: 20px; color: #ccc;">
+        <li style="margin-bottom: 8px;">
+            <strong>Ediciones limitadas por pedido o bajo demanda (<span lang="ja">完全受注生産限定盤</span>):</strong> Aquellos materiales de tiraje sumamente exclusivo que solo se fabrican bajo la cantidad exacta de reservas anticipadas solicitadas por los fans.
+        </li>
+        <li>
+            <strong>Ediciones limitadas de primera tirada (<span lang="ja">初回生産限定盤</span>):</strong> Versiones especiales de lanzamiento inicial que contienen coleccionables, portadas alternas o discos adicionales de bonificación, esenciales para coleccionistas.
+        </li>
+    </ul>
+    <p style="font-size: 0.9rem; color: #888; margin-top: 15px; margin-bottom: 0;">
+        De esta manera, nos aseguramos de ofrecer un espacio curado, enfocado en piezas de verdadero valor histórico y coleccionable para la comunidad de este género musical.
+    </p>
+</section>
+
+<!-- Buscador -->
+<div class="search-container" style="text-align: center; margin: 30px 0;">
+    <input type="text" id="buscador" placeholder="Buscar artista..." 
+           onkeyup="filtrarArtistas()" 
+           style="padding: 10px; width: 300px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px;">
+</div>
+
+<% if (typeof artistas !== 'undefined' && artistas.length > 0) { %>
+    <div class="lista-artistas" id="lista-artistas">
+        <% artistas.forEach(artista => { %>
+            <div class="artista-card">
+                <img src="<%= artista['imagen_url: text'] %>" alt="<%= artista.nombre %>">
+                <h3><%= artista.nombre %></h3>
+                <p><%= artista.biografia %></p>
+                <a href="/detalle/<%= artista.id %>">Ver más</a>
+            </div>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p>No se encontraron artistas en la base de datos.</p>
+<% } %>
 <%- include('footer') %>
