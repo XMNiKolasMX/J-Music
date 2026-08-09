@@ -6,7 +6,6 @@
 
     <!-- Etiqueta de verificación de Google AdSense -->
     <meta name="google-adsense-account" content="ca-pub-5210991734700790">
-
     <meta name="384754f9dfffc533a34460713aa65c711e46ac09" content="384754f9dfffc533a34460713aa65c711e46ac09" />
 
     <!-- Google tag (gtag.js) -->
@@ -15,14 +14,11 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-
       gtag('config', 'G-J3HT01W0W7');
     </script>
 
     <!-- Script de Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5210991734700790"
-     crossorigin="anonymous"></script>
-
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5210991734700790" crossorigin="anonymous"></script>
 
     <!-- Script de Adsterra -->
     <script>
@@ -37,10 +33,22 @@
     l.parentNode.insertBefore(s, l);
     })({})
     </script>
-
 </head>
 <body>
-    <nav>
-        <a href="/">Inicio</a> | <a href="/artistas">Artistas</a> | <a href="/sobre-nosotros">Sobre Nosotros</a>
+    <nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
+        <div class="menu-enlaces">
+            <a href="/"><%= t.nav_inicio %></a> | 
+            <a href="/artistas"><%= t.nav_artistas %></a> | 
+            <a href="/sobre-nosotros"><%= t.nav_nosotros %></a>
+        </div>
+        
+        <!-- Selector de Idiomas Global (5 idiomas) -->
+        <div class="selector-idiomas" style="display: flex; gap: 6px; font-weight: bold; font-size: 0.9rem;">
+            <a href="?lang=es" style="text-decoration: none; color: <%= currentLang === 'es' ? '#ff0000' : '#fff' %>;">ES</a> |
+            <a href="?lang=en" style="text-decoration: none; color: <%= currentLang === 'en' ? '#ff0000' : '#fff' %>;">EN</a> |
+            <a href="?lang=ja" style="text-decoration: none; color: <%= currentLang === 'ja' ? '#ff0000' : '#fff' %>;">日本語</a> |
+            <a href="?lang=ru" style="text-decoration: none; color: <%= currentLang === 'ru' ? '#ff0000' : '#fff' %>;">РУС</a> |
+            <a href="?lang=pt" style="text-decoration: none; color: <%= currentLang === 'pt' ? '#ff0000' : '#fff' %>;">PT</a>
+        </div>
     </nav>
     <hr>
