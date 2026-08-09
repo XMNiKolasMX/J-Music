@@ -1,0 +1,60 @@
+<%- include('header') %>
+
+<main class="container">
+    <h1 style="color: #fff; margin-bottom: 25px;"><%= t.info_titulo %></h1>
+
+    <!-- Nota Informativa -->
+    <section class="nota-informativa" style="margin-bottom: 30px; padding: 25px; background-color: #0a0a0a; border-left: 5px solid #8b0000; border-radius: 4px; line-height: 1.6;">
+        <h3 style="margin-top: 0; color: #ff0000; font-size: 1.25rem; margin-bottom: 15px;"><%= t.info_titulo %></h3>
+        
+        <p><%= t.info_p1 %></p>
+        
+        <p><%= t.info_p2 %></p>
+
+        <hr style="border: 0; border-top: 1px solid #222; margin: 20px 0;">
+
+        <h4 style="color: #fff; margin-bottom: 10px; font-size: 1.1rem;"><%= t.politica_titulo %></h4>
+        <p><%= t.politica_p1 %></p>
+        
+        <ul style="margin-top: 5px; padding-left: 20px; color: #ccc;">
+            <li style="margin-bottom: 8px;">
+                <strong><%= t.politica_item1_titulo %>:</strong> <%= t.politica_item1_desc %>
+            </li>
+            <li>
+                <strong><%= t.politica_item2_titulo %>:</strong> <%= t.politica_item2_desc %>
+            </li>
+        </ul>
+        <p style="font-size: 0.9rem; color: #888; margin-top: 15px; margin-bottom: 0;">
+            <%= t.politica_footer %>
+        </p>
+    </section>
+
+    <!-- Sección: Cómo reproducir tus archivos (DVD, BD y VHS) -->
+    <section class="guia-reproduccion" style="margin-bottom: 30px; padding: 25px; background-color: #0a0a0a; border-left: 5px solid #444; border-radius: 4px; line-height: 1.6;">
+        <h3 style="margin-top: 0; color: #fff; font-size: 1.25rem; margin-bottom: 15px;"><%= t.guia_titulo %></h3>
+        
+        <p style="color: #ccc; margin-bottom: 20px;"><%= t.guia_sub %></p>
+
+        <ol style="padding-left: 20px; color: #ccc;">
+            <li style="margin-bottom: 12px;">
+                <strong><%= t.guia_paso1_t %>:</strong> <%= t.guia_paso1_d %>
+            </li>
+            <li style="margin-bottom: 12px;">
+                <strong><%= t.guia_paso2_t %>:</strong> <%= t.guia_paso2_d %>
+            </li>
+            <li style="margin-bottom: 12px;">
+                <strong><%= t.guia_paso3_t %>:</strong> <%= t.guia_paso3_d %>
+            </li>
+            <li style="margin-bottom: 12px;">
+                <strong><%= t.guia_paso4_t %>:</strong> <%= t.guia_paso4_d %>
+                <ul style="margin-top: 8px; padding-left: 20px; list-style-type: circle;">
+                    <li style="margin-bottom: 6px;"><strong><%= t.guia_sub_dvd_t %>:</strong> <%= t.guia_sub_dvd_d %></li>
+                    <li style="margin-bottom: 6px;"><strong><%= t.guia_sub_bluray_t %>:</strong> <%= t.guia_sub_bluray_d %></li>
+                    <li style="margin-bottom: 6px;"><strong><%= t.guia_sub_mpchc_t %>:</strong> <%= t.guia_sub_mpchc_d %></li>
+                </ul>
+            </li>
+        </ol>
+    </section>
+</main>
+
+<%- include('footer') %>
