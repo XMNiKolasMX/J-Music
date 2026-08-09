@@ -36,19 +36,25 @@
 </head>
 <body>
     <nav style="display: flex; justify-content: space-between; align-items: center; padding: 10px 20px;">
-        <div class="menu-enlaces">
-            <a href="/"><%= t.nav_inicio %></a> | 
-            <a href="/artistas"><%= t.nav_artistas %></a> | 
-            <a href="/sobre-nosotros"><%= t.nav_nosotros %></a>
+        <div class="menu-enlaces" style="display: flex; align-items: center; gap: 12px;">
+            <!-- Indicador de Versión -->
+            <span style="background: #8b0000; color: #fff; font-size: 0.75rem; font-weight: bold; padding: 2px 6px; border-radius: 4px; letter-spacing: 0.5px;">v 2.5</span>
+            
+            <div>
+                <a href="/"><%= t.nav_inicio %></a> | 
+                <a href="/artistas"><%= t.nav_artistas %></a> | 
+                <a href="/criterios"><%= t.nav_criterios %></a> | 
+                <a href="/sobre-nosotros"><%= t.nav_nosotros %></a>
+            </div>
         </div>
         
-        <!-- Selector de Idiomas Global (5 idiomas) -->
-        <div class="selector-idiomas" style="display: flex; gap: 6px; font-weight: bold; font-size: 0.9rem;">
-            <a href="?lang=es" style="text-decoration: none; color: <%= currentLang === 'es' ? '#ff0000' : '#fff' %>;">ES</a> |
-            <a href="?lang=en" style="text-decoration: none; color: <%= currentLang === 'en' ? '#ff0000' : '#fff' %>;">EN</a> |
-            <a href="?lang=ja" style="text-decoration: none; color: <%= currentLang === 'ja' ? '#ff0000' : '#fff' %>;">日本語</a> |
-            <a href="?lang=ru" style="text-decoration: none; color: <%= currentLang === 'ru' ? '#ff0000' : '#fff' %>;">РУС</a> |
-            <a href="?lang=pt" style="text-decoration: none; color: <%= currentLang === 'pt' ? '#ff0000' : '#fff' %>;">PT</a>
+        <!-- Selector de Idiomas Global (con banderitas y 5 idiomas) -->
+        <div class="selector-idiomas" style="display: flex; gap: 8px; font-weight: bold; font-size: 0.9rem; align-items: center;">
+            <a href="?lang=es" style="text-decoration: none; color: <%= currentLang === 'es' ? '#ff0000' : '#fff' %>;" title="Español">🇪🇸 ES</a> |
+            <a href="?lang=en" style="text-decoration: none; color: <%= currentLang === 'en' ? '#ff0000' : '#fff' %>;" title="English">🇺🇸 EN</a> |
+            <a href="?lang=ja" style="text-decoration: none; color: <%= currentLang === 'ja' ? '#ff0000' : '#fff' %>;" title="Japonés">🇯🇵 日本語</a> |
+            <a href="?lang=ru" style="text-decoration: none; color: <%= currentLang === 'ru' ? '#ff0000' : '#fff' %>;" title="Ruso">🇷🇺 РУС</a> |
+            <a href="?lang=pt" style="text-decoration: none; color: <%= currentLang === 'pt' ? '#ff0000' : '#fff' %>;" title="Portugués">🇧🇷 PT</a>
         </div>
     </nav>
     <hr>
