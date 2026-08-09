@@ -2,8 +2,8 @@
 
 <main class="container">
     <section class="bienvenida">
-        <h1>Bienvenido a J-Music</h1>
-        <p>El santuario definitivo para los amantes del Visual Kei y J-Rock en general.</p>
+        <h1><%= t.bienvenida_titulo %></h1>
+        <p><%= t.bienvenida_sub %></p>
         
         <div class="caja-imagenes">
             <!-- Imagen Izquierda -->
@@ -14,9 +14,39 @@
         </div>
     </section>
 
+    <!-- ================================================= -->
+    <!-- NUEVA SECCIÓN: ÚLTIMOS 5 AGREGADOS DE SUPABASE -->
+    <!-- ================================================= -->
+    <section class="ultimos-agregados" style="margin: 40px 0; padding: 0 20px;">
+        <h2 style="color: #fff; text-align: center; margin-bottom: 25px;"><%= t.ultimos_agregados %></h2>
+        
+        <% if (typeof ultimosAgregados !== 'undefined' && ultimosAgregados.length > 0) { %>
+            <div class="lista-artistas" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                <% ultimosAgregados.forEach(video => { %>
+                    <div class="artista-card" style="background: #111; padding: 15px; border-radius: 6px; position: relative;">
+                        
+                        <% if (video.portada_url) { %>
+                            <img src="<%= video.portada_url %>" alt="<%= video.titulo %>" referrerpolicy="no-referrer" style="width: 100%; height: 160px; object-fit: cover; border-radius: 4px;">
+                        <% } %>
+                        
+                        <h3 style="font-size: 1rem; color: #fff; margin: 10px 0;"><%= video.titulo || 'Sin título' %></h3>
+                        <p style="font-size: 0.85rem; color: #aaa; margin-bottom: 10px;">Lanzamiento: <%= video.fecha_lanzamiento || 'N/A' %></p>
+                        
+                        <% if (video.artista_id) { %>
+                            <a href="/detalle/<%= video.artista_id %>" class="btn-descarga" style="display: inline-block; padding: 6px 12px; background: #8b0000; color: #fff; text-decoration: none; border-radius: 4px; font-size: 0.85rem;"><%= t.ver_detalle %></a>
+                        <% } %>
+                    </div>
+                <% }) %>
+            </div>
+        <% } else { %>
+            <p style="text-align: center; color: #888;">No hay registros recientes.</p>
+        <% } %>
+    </section>
+    <!-- ================================================= -->
+
     <section class="descripcion">
-        <h2>Un viaje a través de las décadas</h2>
-        <p>Nuestro archivo no tiene límites temporales. Nos dedicamos a rastrear la historia del Visual Kei desde sus cimientos más crudos hasta la vanguardia actual.</p>
+        <h2><%= t.seccion_decadas %></h2>
+        <p><%= t.desc_decadas %></p>
         
         <div class="cronologia" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 30px 0;">
             <div class="epoca">
