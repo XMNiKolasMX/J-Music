@@ -26,4 +26,23 @@
     <% } %>
 </main>
 
+<!-- Script para hacer funcionar el buscador de artistas -->
+<script>
+    function filtrarArtistas() {
+        let input = document.getElementById('buscador').value.toLowerCase();
+        let cards = document.getElementsByClassName('artista-card');
+
+        for (let i = 0; i < cards.length; i++) {
+            let title = cards[i].getElementsByTagName('h3')[0];
+            let textValue = title.textContent || title.innerText;
+            
+            if (textValue.toLowerCase().indexOf(input) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    }
+</script>
+
 <%- include('footer') %>
