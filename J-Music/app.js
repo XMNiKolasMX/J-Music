@@ -151,3 +151,9 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en puerto ${PORT}`);
 });
+
+
+// Ruta para Criterios y Guía de Reproducción
+app.get('/criterios', (req, res) => {
+    res.render('criterios');
+});
