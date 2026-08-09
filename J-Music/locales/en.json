@@ -39,7 +39,7 @@
   "guia_sub_mpchc_d": "Go to File > Quick Open File... or Open Directory... and select the root folder of the format to automatically read the original contents or menus.",
   "buscador_placeholder": "Search artist...",
   "ver_mas": "View more",
-  "no_artistas": "No artists found in the database."
+  "no_artistas": "No artists found in the database.",
   "decada_80_90_desc": "The golden era of heavy makeup and the underground sound.",
   "decada_2000_desc": "The global explosion and evolution towards more alternative sounds.",
   "compromiso_titulo": "Our Commitment",
@@ -49,8 +49,8 @@
   "compromiso_distribucion_t": "Distribution Methodology",
   "compromiso_distribucion_d": "Once the material has been digitized, we do not let it get lost on a personal hard drive. Our mission is open dissemination. Therefore, we upload each piece to robust and accessible storage platforms, such as TeraBox. We know stability is key, so every concert, documentary, or music video is meticulously organized, categorized, and when dealing with heavy files, divided into multiple parts. This structure ensures that any community member can perform a stable and successful download.",
   "compromiso_esfuerzo_t": "Why this effort in the year 2026?",
-  "compromiso_esfuerzo_d": "We live in a transitional era where physical media is rapidly disappearing. DVD and tape players are becoming antiques, and the entertainment industry has prioritized the ephemeral. By carrying out this preservation work, we prevent our musical culture from falling into a digital 'black hole'. We are building a living archive, a high-quality public library ensuring that the work of Japanese artists does not vanish alongside its original media."
-"nosotros_como_funciona_t": "How does our archive work?",
+  "compromiso_esfuerzo_d": "We live in a transitional era where physical media is rapidly disappearing. DVD and tape players are becoming antiques, and the entertainment industry has prioritized the ephemeral. By carrying out this preservation work, we prevent our musical culture from falling into a digital 'black hole'. We are building a living archive, a high-quality public library ensuring that the work of Japanese artists does not vanish alongside its original media.",
+  "nosotros_como_funciona_t": "How does our archive work?",
   "nosotros_como_funciona_p1": "It is essential to clarify our methodology so you understand the value of what is shared here: We are not a store, we do not make sales, nor do we accept custom orders. We are, above all, a self-managed digital preservation log.",
   "nosotros_proceso_intro": "Our acquisition process is a detective-like work that occurs in several strict phases:",
   "nosotros_fase1_t": "Constant tracking",
